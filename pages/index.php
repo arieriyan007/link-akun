@@ -65,20 +65,19 @@ include "../layouts/header.php";
                     }
                     //  akhir search/pencarian data
                     // membuat pagination perhalaman
-                    $batas = 5; //batas perhalaman
-                    $halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1; //membuat perhalaman saja
-                    $halaman_awal =($halaman>1) ? ($halaman * $batas) - $batas : 0; //menjumlahkan halam dari halaman awal
+                    // $batas = 5; //batas perhalaman
+                    // $halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1; //membuat perhalaman saja
+                    // $halaman_awal =($halaman>1) ? ($halaman * $batas) - $batas : 0; //menjumlahkan halam dari halaman awal
                     
-                    $previous = $halaman-1;
-                    $next = $halaman+1;
+                    // $previous = $halaman-1;
+                    // $next = $halaman+1;
                     
                     $dataakun = mysqli_query($koneksi, $data);
-                    $jumlah_data = mysqli_num_rows($dataakun); //menjumlah data didalam database
-                    $total_halaman = ceil($jumlah_data / $batas); //selanjutnya total halamannya dengan cara di bagi dari jumlah data/batas
-                    
-                    $data_akun = mysqli_query($koneksi, "SELECT * FROM site_akun limit $halaman_awal, $batas"); //dibagian ini data situs_akun di batasin untuk menampilkan semua datanya perhalaman
-                    $no= $halaman_awal+1; //pembuatan nomor urut
-                    while ($d = mysqli_fetch_array($data_akun)) { //jangan lupa untuk $data_akun di ambil dari limitnya
+                    $no=1; //$halaman_awal+1; //pembuatan nomor urut
+                    // $jumlah_data = mysqli_num_rows($dataakun); //menjumlah data didalam database
+                    // $total_halaman = ceil($jumlah_data / $batas); //selanjutnya total halamannya dengan cara di bagi dari jumlah data/batas
+                    // $data_akun = mysqli_query($koneksi, "SELECT * FROM site_akun limit $halaman_awal, $batas"); //dibagian ini data situs_akun di batasin untuk menampilkan semua datanya perhalaman
+                      while ($d = mysqli_fetch_array($dataakun)) {//jangan lupa untuk $data_akun di ambil dari limitnya
                       ?>
                       <tr>
                         <td><?= $no++; ?></td>
@@ -93,31 +92,9 @@ include "../layouts/header.php";
                           <a href="hapusAkun.php?id=<?= $ida; ?>" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</a>
                         </td>
                       </tr>
-                      <?php 
+                    <?php 
                     }
                     ?>
-                    <!-- membuat pagination berurutan -->
-                       <nav aria-label="Page navigation example">
-                       <ul class="pagination justify-content-center mt-2">
-                         <li class="page-item">
-                           <a class="page-link" <?php if ($halaman > 1) {
-                             echo "href='?halaman=$previous'";
-                            } ?>>Previous</a></li>
-                            <?php 
-                            for($x=1; $x<=$total_halaman; $x++){
-                              ?>
-                          <li class="page-item">
-                            <a class="page-link" href="?halaman=<?php echo $x ?>"><?= $x; ?></a></li>
-                              <?php
-                          }
-                          ?>
-                            <li class="page-item">
-                              <a class="page-link" <?php if ($halaman < $total_halaman) {
-                                echo "href='?halaman=$next'";
-                              } ?>>Next</a></li>
-                        </ul>
-                      </nav>
-                      <!-- akhir pagination dengan angka berurutan -->
                  </tbody>
                     
                 </table>
