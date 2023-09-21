@@ -88,13 +88,25 @@ include "../layouts/header.php";
                         <td><?= $d['jabatan']; ?></td>
                         <td><?= $d['tanggal']; ?></td>
                         <td>
-                          <a href="editAkun.php?id=<?= $ida; ?>" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                          <a href="hapusAkun.php?id=<?= $ida; ?>" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</a>
+                          <a href="editAkun.php?id=<?= $d['idakun']; ?>" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                          <a href="?id=<?= $d['idakun']; ?>" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</a>
                         </td>
                       </tr>
-                    <?php 
+                      <?php 
                     }
                     ?>
+                    <!-- delete data -->
+                    <?php 
+                    if (isset($_GET['id'])) {
+
+                      // proses hapus data
+                      mysqli_query($koneksi, "DELETE FROM site_akun WHERE idakun='$_GET[id]' ");
+
+                      echo "Data akun telah dihapus";
+                      echo "<meta http-equiv=refresh content=2;URL='index.php'>";
+                    }
+                    ?>
+                    <!-- akhir delete data -->
                  </tbody>
                     
                 </table>
