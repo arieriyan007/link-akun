@@ -40,6 +40,25 @@ include "../layouts/header.php";
               </div>
              </div>
 		 </div>
+
+     <!-- notifikasi/pesan -->
+              <?php 
+              if (isset($_GET['pesan'])) {
+                if ($_GET['pesan']=="berhasiltambahakun") {
+                  echo "<div class='alert alert-info alert-dismissible text-center'>
+                  <strong>Info !</strong> Berhasil tambah akun baru.
+                </div>";
+                echo "<meta http-equiv=refresh content=2;URL='index.php'>";
+                } elseif ($_GET['pesan']=="berhasildiupdate") {
+                  echo "<div class='alert alert-info alert-dismissible text-center'>
+                  <strong>Info !</strong> Data berhasil disimpan dan diperbaharui.
+                </div>";
+                echo "<meta http-equiv=refresh content=2;URL='index.php'>";
+                } 
+              }
+              ?>
+     <!-- akhir notifikasi/pesan -->
+
 	       <div class="table-responsive table-bordered table-hover" border="1">
                  <table class="table align-items-center table-flush table-borderless">
                   <thead>
@@ -100,9 +119,9 @@ include "../layouts/header.php";
                     if (isset($_GET['id'])) {
 
                       // proses hapus data
-                      mysqli_query($koneksi, "DELETE FROM site_akun WHERE idakun='$_GET[id]' ");
-
-                      echo "Data akun telah dihapus";
+                     $data = mysqli_query($koneksi, "DELETE FROM site_akun WHERE idakun='$_GET[id]' ");
+                     
+                      echo "<div class='alert alert-warning text-center'> Data akun telah dihapus !</div>"; 
                       echo "<meta http-equiv=refresh content=2;URL='index.php'>";
                     }
                     ?>

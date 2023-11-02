@@ -7,7 +7,7 @@ if (isset($_POST['saveAkun'])) {
     $pass = $_POST['pswakun'];
     $ins  = $_POST['instansi'];
     $pemilik = $_POST['pemilik'];
-    $emial = $_POST['email'];
+    $email = $_POST['email'];
 
     $tambahakun = mysqli_query($koneksi, "INSERT INTO site_akun (situs, userakun, passkun, nama_lembaga, jabatan, email) VALUES ('$link', '$user', '$pass', '$ins', '$pemilik', '$email')");
 
